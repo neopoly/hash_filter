@@ -1,5 +1,69 @@
-require "hash_filter/version"
+class HashFilter
+  attr_reader :operations
+  protected :operations
 
-module HashFilter
-  # Your code goes here...
+  def initialize(&block)
+    @operations = []
+    instance_eval(&block) if block
+  end
+
+  def rename(from, to)
+    operation Operation::Rename, from, to
+  end
+
+  def delete(key)
+    operation Operation::Delete, key
+  end
+
+  def inject(filter)
+    @operations.concat filter.operations
+  end
+
+  def apply(hash)
+    dup = hash.dup
+    dup.keys.each do |key|
+      @operations.each do |operation|
+        if operation.matches?(key)
+          operation.execute(dup, key)
+        end
+      end
+    end
+    dup
+  end
+
+  def operation(class_name, *args)
+    @operations << class_name.new(*args)
+  end
+
+  class Operation
+    def initialize(key)
+      @key = key
+    end
+
+    def execute(hash, key)
+      raise NotImplementedError
+    end
+
+    def matches?(key)
+      @key === key
+    end
+
+    class Rename < self
+      def initialize(from, to)
+        super(from)
+        @to = to
+      end
+
+      def execute(hash, old)
+        new = old.gsub(@key, @to)
+        hash[new] = hash.delete(old)
+      end
+    end
+
+    class Delete < self
+      def execute(hash, key)
+        hash.delete(key)
+      end
+    end
+  end
 end
