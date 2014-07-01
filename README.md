@@ -1,5 +1,7 @@
 # HashFilter
 
+[![Build Status](http://img.shields.io/travis/neopoly/hash_filter.svg?branch=master)](https://travis-ci.org/neopoly/hash_filter) [![Gem Version](http://img.shields.io/gem/v/hash_filter.svg)](https://rubygems.org/gems/hash_filter) [![Code Climate](http://img.shields.io/codeclimate/github/neopoly/hash_filter.svg)](https://codeclimate.com/github/neopoly/hash_filter) [![Inline docs](http://inch-ci.org/github/neopoly/hash_filter.svg?branch=master)](http://inch-ci.org/github/neopoly/hash_filter)
+
 A simple hash filter.
 
 ## Installation
