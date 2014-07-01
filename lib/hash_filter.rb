@@ -3,6 +3,7 @@ class HashFilter
   protected :operations
 
   def initialize(&block)
+    @keeps      = []
     @operations = []
     instance_eval(&block) if block
   end
@@ -19,9 +20,14 @@ class HashFilter
     @operations.concat filter.operations
   end
 
+  def keep(key)
+    @keeps << key
+  end
+
   def apply(hash)
     dup = hash.dup
     dup.keys.each do |key|
+      next if keep?(key)
       @operations.each do |operation|
         if operation.matches?(key)
           operation.execute(dup, key)
@@ -33,6 +39,14 @@ class HashFilter
 
   def operation(class_name, *args)
     @operations << class_name.new(*args)
+  end
+
+  private
+
+  def keep?(key)
+    @keeps.any? do |keep|
+      keep === key
+    end
   end
 
   class Operation

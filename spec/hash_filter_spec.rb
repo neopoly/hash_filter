@@ -99,6 +99,29 @@ describe HashFilter do
     end
   end
 
+  describe "keep" do
+    let(:filter) do
+      subject.new do
+        keep /foo/
+        delete /.*/
+        keep /bar/i
+      end
+    end
+
+    let(:plain_hash) do
+      Hash[
+        "foo" => 1,
+        "FOO" => 2,
+        "BaR" => 3,
+        "yay" => 4
+      ]
+    end
+
+    it "keeps keys" do
+      assert_hash "foo" => 1, "BaR" => 3
+    end
+  end
+
   private
 
   def assert_hash(expected={})
