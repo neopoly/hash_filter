@@ -1,3 +1,5 @@
+require 'hash_filter/operation'
+
 class HashFilter
   attr_reader :operations
   protected :operations
@@ -46,38 +48,6 @@ class HashFilter
   def keep?(key)
     @keeps.any? do |keep|
       keep === key
-    end
-  end
-
-  class Operation
-    def initialize(key)
-      @key = key
-    end
-
-    def execute(hash, key)
-      raise NotImplementedError
-    end
-
-    def matches?(key)
-      @key === key
-    end
-
-    class Rename < self
-      def initialize(from, to)
-        super(from)
-        @to = to
-      end
-
-      def execute(hash, old)
-        new = old.gsub(@key, @to)
-        hash[new] = hash.delete(old)
-      end
-    end
-
-    class Delete < self
-      def execute(hash, key)
-        hash.delete(key)
-      end
     end
   end
 end
