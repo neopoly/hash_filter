@@ -1,13 +1,22 @@
 # Changelog
 
-## v0.0.1
+## vX.X.X
 
 * Enhancements
-  * Initial implementation
-  * Implement `keep` operation
 
 * Bug fixes
 
 * Deprecations
 
 * Backwards incompatible changes
+
+## v0.1.0
+
+* Bug fixes
+  * Take over `keep` operations via `inject`
+
+## v0.0.1
+
+* Enhancements
+  * Initial implementation
+  * Implement `keep` operation
