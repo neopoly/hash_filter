@@ -1,8 +1,8 @@
 require 'hash_filter/operation'
 
 class HashFilter
-  attr_reader :operations
-  protected :operations
+  attr_reader :operations, :keeps
+  protected :operations, :keeps
 
   def initialize(&block)
     @keeps      = []
@@ -19,6 +19,7 @@ class HashFilter
   end
 
   def inject(filter)
+    @keeps.concat filter.keeps
     @operations.concat filter.operations
   end
 

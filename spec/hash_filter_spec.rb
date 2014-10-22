@@ -75,16 +75,21 @@ describe HashFilter do
   end
 
   describe "inject" do
-    let(:filter) do
-      filter1 = subject.new do
+    let(:filter1) do
+      subject.new do
         delete /foo/
         delete /FOO/
       end
-      filter2 = subject.new { rename /bar/, "baz" }
-
+    end
+    let(:filter2) do
       subject.new do
-        inject filter1
-        inject filter2
+        rename /bar/, "baz"
+      end
+    end
+    let(:filter) do
+      subject.new.tap do |filter|
+        filter.inject filter1
+        filter.inject filter2
       end
     end
 
@@ -96,6 +101,13 @@ describe HashFilter do
 
     it "injects operations from other filters" do
       assert_hash "baz" => 3
+    end
+
+    it "injects keeps from other filters too" do
+      filter1.keep "foo2"
+      plain_hash["foo2"] = :kept
+
+      assert_hash "baz" => 3, "foo2" => :kept
     end
   end
 
