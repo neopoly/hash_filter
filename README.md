@@ -1,6 +1,21 @@
+[github]: https://github.com/neopoly/hash_filter
+[doc]: http://rubydoc.info/github/neopoly/hash_filter/master/file/README.md
+[gem]: https://rubygems.org/gems/hash_filter
+[travis]: https://travis-ci.org/neopoly/hash_filter
+[codeclimate]: https://codeclimate.com/github/neopoly/hash_filter
+[inchpages]: https://inch-ci.org/github/neopoly/hash_filter
+
 # HashFilter
 
-[![Build Status](http://img.shields.io/travis/neopoly/hash_filter.svg?branch=master)](https://travis-ci.org/neopoly/hash_filter) [![Gem Version](http://img.shields.io/gem/v/hash_filter.svg)](https://rubygems.org/gems/hash_filter) [![Code Climate](http://img.shields.io/codeclimate/github/neopoly/hash_filter.svg)](https://codeclimate.com/github/neopoly/hash_filter) [![Inline docs](http://inch-ci.org/github/neopoly/hash_filter.svg?branch=master)](http://inch-ci.org/github/neopoly/hash_filter)
+[![Travis](https://img.shields.io/travis/neopoly/hash_filter.svg?branch=master)][travis]
+[![Gem Version](https://img.shields.io/gem/v/hash_filter.svg)][gem]
+[![Code Climate](https://img.shields.io/codeclimate/github/neopoly/hash_filter.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/neopoly/hash_filter/badges/coverage.svg)][codeclimate]
+[![Inline docs](https://inch-ci.org/github/neopoly/hash_filter.svg?branch=master&style=flat)][inchpages]
+
+[Gem][gem] |
+[Source][github] |
+[Documentation][doc]
 
 A simple hash filter.
 
