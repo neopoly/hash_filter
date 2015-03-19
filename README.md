@@ -36,33 +36,31 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+remove_images = HashFilter.new do
+  delete /\.jpg$/
+  delete /\.png$/
+  delete /\.gif$/
+end
 
-  remove_images = HashFilter.new do
-    delete /\.jpg$/
-    delete /\.png$/
-    delete /\.gif$/
-  end
+rename_html = HashFilter.new do
+  rename /(.*?)\.htm$/, '\1.html'
+end
 
-  rename_html = HashFilter.new do
-    rename /(.*?)\.htm$/, '\1.html'
-  end
+filter = HashFilter.new do
+  inject remove_images
+  inject rename_html
+end
 
-  filter = HashFilter.new do
-    inject remove_images
-    inject rename_html
-  end
+hash = {
+  "image.jpg" => "/path/to/image.jpg",
+  "image.png" => "/path/to/image.png",
+  "page.htm"  => "/path/to/page.html"
+}
 
-  hash = {
-    "image.jpg" => "/path/to/image.jpg",
-    "image.png" => "/path/to/image.png",
-    "page.htm"  => "/path/to/page.html"
-  }
-
-  p filter.apply hash
-  # {
-  #   "page.html" => "/path/to/page.html"
-  # }
-
+p filter.apply hash
+# {
+#   "page.html" => "/path/to/page.html"
+# }
 ```
 
 ## Contributing
