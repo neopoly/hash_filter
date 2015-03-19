@@ -33,6 +33,38 @@ describe HashFilter do
     end
   end
 
+  describe "abstract" do
+    let(:abstract) do
+      Class.new(HashFilter::Operation) {}
+    end
+    let(:unused) { :unused }
+
+    it "requires execute to be implemented" do
+      assert_raises NotImplementedError do
+        abstract.new(unused).execute(unused, unused)
+      end
+    end
+
+    it "matches a string key" do
+      operation = abstract.new("key")
+
+      assert operation.matches?("key")
+
+      refute operation.matches?("nope")
+      refute operation.matches?("KEY")
+    end
+
+    it "matches a regexp key" do
+      operation = abstract.new(/key/i)
+
+      assert operation.matches?("key")
+      assert operation.matches?("KEY")
+      assert operation.matches?("subkey")
+
+      refute operation.matches?("nope")
+    end
+  end
+
   describe "delete" do
     let(:plain_hash) { Hash["key" => "value"] }
 
