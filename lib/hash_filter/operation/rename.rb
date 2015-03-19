@@ -1,6 +1,7 @@
 class HashFilter
   class Operation
-     class Rename < self
+    # Rename a key in a hash
+    class Rename < self
       def initialize(from, to)
         super(from)
         @to = to
